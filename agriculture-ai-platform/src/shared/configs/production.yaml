@@ -1,0 +1,28 @@
+# Production configuration
+
+app:
+  environment: "production"
+  debug: false
+
+server:
+  workers: 4
+
+database:
+  host: "prod-db.agriculture-ai.com"
+  echo: false
+  pool_size: 30
+
+redis:
+  host: "prod-redis.agriculture-ai.com"
+  db: 0
+  cache_ttl: 7200
+
+neo4j:
+  uri: "bolt://prod-neo4j.agriculture-ai.com:7687"
+
+logging:
+  level: "WARNING"
+
+monitoring:
+  prometheus_enabled: true
+  grafana_url: "https://grafana.agriculture-ai.com"

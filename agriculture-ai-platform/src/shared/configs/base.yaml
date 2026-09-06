@@ -1,0 +1,42 @@
+# Base configuration
+
+app:
+  name: "Agriculture AI Platform"
+  version: "1.0.0"
+  environment: "development"
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+
+database:
+  host: "localhost"
+  port: 5432
+  name: "agriculture_ai"
+  pool_size: 20
+  max_overflow: 10
+
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  cache_ttl: 3600
+
+ml:
+  model_path: "data/models"
+  model_name: "disease_classifier"
+  confidence_threshold: 0.85
+
+neo4j:
+  uri: "bolt://localhost:7687"
+  user: "neo4j"
+  password: "password"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+monitoring:
+  prometheus_enabled: true
+  prometheus_port: 8001

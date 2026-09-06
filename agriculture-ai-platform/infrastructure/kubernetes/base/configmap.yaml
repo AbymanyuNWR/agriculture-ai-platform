@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_NAME: "Agriculture AI Platform"
+  LOG_LEVEL: "INFO"
+  PROMETHEUS_ENABLED: "true"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ml-config
+data:
+  mlflow-uri: "http://mlflow-service:5000"
+  model-name: "disease_classifier"
+  confidence-threshold: "0.85"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    events {
+        worker_connections 1024;
+    }
+    http {
+        upstream api {
+            server agriculture-api-service:80;
+        }
+        upstream ml {
+            server agriculture-ml-service:80;
+        }
+        server {
+            listen 80;
+            location / {
+                proxy_pass http://api;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+            }
+            location /ml {
+                proxy_pass http://ml;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+            }
+        }
+    }

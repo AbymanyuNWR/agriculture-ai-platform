@@ -1,0 +1,21 @@
+# Development configuration
+
+app:
+  environment: "development"
+  debug: true
+
+server:
+  workers: 1
+  reload: true
+
+database:
+  echo: true
+
+redis:
+  db: 1
+
+logging:
+  level: "DEBUG"
+
+monitoring:
+  prometheus_enabled: false

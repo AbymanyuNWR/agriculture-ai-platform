@@ -1,0 +1,25 @@
+# Staging configuration
+
+app:
+  environment: "staging"
+  debug: false
+
+server:
+  workers: 2
+
+database:
+  host: "staging-db.agriculture-ai.com"
+  echo: false
+
+redis:
+  host: "staging-redis.agriculture-ai.com"
+  db: 0
+
+neo4j:
+  uri: "bolt://staging-neo4j.agriculture-ai.com:7687"
+
+logging:
+  level: "INFO"
+
+monitoring:
+  prometheus_enabled: true
